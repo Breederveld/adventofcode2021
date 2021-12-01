@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codeadvent1-1", "codeadvent1-1.csproj", "{538FD8E8-10B0-4A05-A267-CFF7000E4F14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "codeavent1-2", "..\codeavent1-2\codeavent1-2.csproj", "{914285FE-2E97-4693-8B52-5A2DA0577F3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{538FD8E8-10B0-4A05-A267-CFF7000E4F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{538FD8E8-10B0-4A05-A267-CFF7000E4F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{538FD8E8-10B0-4A05-A267-CFF7000E4F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{538FD8E8-10B0-4A05-A267-CFF7000E4F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{914285FE-2E97-4693-8B52-5A2DA0577F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914285FE-2E97-4693-8B52-5A2DA0577F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914285FE-2E97-4693-8B52-5A2DA0577F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914285FE-2E97-4693-8B52-5A2DA0577F3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A10D13FE-704D-47B7-B5A5-90D7B9C08222}
+	EndGlobalSection
+EndGlobal
