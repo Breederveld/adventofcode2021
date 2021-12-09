@@ -10,8 +10,8 @@ namespace codeavent8_2
         {
             var lines = Input.CodeStrings().ToList();
             int total = 0;
-            int counter = 0;
-            for(int i = 0; i < lines.Count; i++)
+
+            for (int i = 0; i < lines.Count; i++)
             {
                 var line = lines[i];
                 Dictionary<int, char> sections = new Dictionary<int, char>
@@ -76,17 +76,17 @@ namespace codeavent8_2
                 digits[3] = fivenumberdigits[0];
                 sections[1] = CharNotInNumber(digits[4], string.Join("", new List<char> { sections[2], sections[3], sections[5] }));
                 sections[6] = CharNotInNumber(digits[8], string.Join("", new List<char> { sections[0], sections[1], sections[2], sections[3], sections[4], sections[5] }));
-                var found = sections.Where((item, index) => item.Key != index && sections[index] == item.Value).ToList();
-                if(found.Count > 0)
-                {
+                var found = GetDuplicaties(sections);
+                var found2 = GetDuplicaties(digits);
+
+                if (!ValidateNumbers(digits,sections) || found || found2 || digits.Where(item => string.IsNullOrWhiteSpace(item.Value)).Count() > 0 || sections.Where(item => item.Value.Equals(' ')).Count() > 0)
+                { 
                     throw new Exception("njoh");
                 }
-                var result = OutputToNumber(digits, line.Outputs.ToList());
-                total += result;
-                counter++;
+                var jan = OutputToNumber(digits, line.Outputs.ToList());
+                total += jan;
             }
 
-            Console.WriteLine(counter);
             Console.WriteLine(total);
         }
 
@@ -136,9 +136,9 @@ namespace codeavent8_2
         public static int OutputToNumber(Dictionary<int, string> digits, List<string> outputs)
         {
             List<int> numbers = new List<int>();
-            foreach(string output in outputs)
+            for(int i = 0; i < outputs.Count; i++)
             {
-                var outputnumber = output.Select(item => Convert.ToInt32(item)).Sum();
+                var outputnumber = outputs[i].Select(item => Convert.ToInt32(item)).Sum();
                 foreach (KeyValuePair<int, string> entry in digits)
                 {
                     var value = entry.Value.Select(item => Convert.ToInt32(item)).Sum(); 
@@ -151,6 +151,95 @@ namespace codeavent8_2
             }
             int result = Convert.ToInt32($"{numbers[0]}{numbers[1]}{numbers[2]}{numbers[3]}");
             return result;
+        }
+
+        public static bool GetDuplicaties(Dictionary<int, string> dict)
+        {
+            for (int i = 0; i < dict.Count; i++)
+            {
+                for (int b = 0; b < dict.Count; b++)
+                {
+                    if (i != b && dict[i] == dict[b])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool GetDuplicaties(Dictionary<int, char> dict)
+        {
+            for (int i = 0; i < dict.Count; i++)
+            {
+                for (int b = 0; b < dict.Count; b++)
+                {
+                    if (i != b && dict[i] == dict[b])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool ValidateNumbers(Dictionary<int, string> digits, Dictionary<int, char> sections)
+        {
+            bool linecorrect = true;
+            foreach(var line in digits)
+            {
+                if(line.Key == 0)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key != 3).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if (line.Key == 1)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key == 2 || item.Key == 5).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if (line.Key == 2)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key != 1 && item.Key != 5).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if (line.Key == 3)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key != 1 && item.Key != 4).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if (line.Key == 4)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key == 1 || item.Key == 2 || item.Key == 3 || item.Key == 5).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if (line.Key == 5)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key != 2 && item.Key != 4).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if (line.Key == 6)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key != 2).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if (line.Key == 7)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key == 0 || item.Key == 2 || item.Key == 5).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if (line.Key == 8)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+                if(line.Key == 9)
+                {
+                    linecorrect = line.Value.Select(item => Convert.ToInt32(item)).Sum() == sections.Where(item => item.Key != 4).Select(item => Convert.ToInt32(item.Value)).Sum();
+                    continue;
+                }
+            }
+            return true;
         }
     }
 }
